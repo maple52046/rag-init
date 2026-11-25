@@ -33,7 +33,7 @@ Tutorial 不應該：
 
 適合標題：
 
-- `Create your first ROCm container`
+- `Create your first container image`
 - `Build and run a minimal inference server`
 - `Write your first knowledge article`
 
@@ -63,7 +63,7 @@ How-to guide 不應該：
 
 適合標題：
 
-- `How to configure ROCm package mirrors`
+- `How to configure package mirrors`
 - `How to export a Docker image tarball`
 - `How to troubleshoot deployment failures`
 
@@ -91,7 +91,7 @@ Reference 不應該：
 適合標題：
 
 - `Docker image tag naming reference`
-- `ROCm base image build arguments`
+- `Base image build arguments`
 - `Supported environment variables`
 
 ---
@@ -116,7 +116,7 @@ Explanation 不應該：
 
 適合標題：
 
-- `Why ROCm image tags include cpXY`
+- `Why image tags include the Python version`
 - `About framework image provenance`
 - `How Diátaxis differs from feature-based documentation`
 

@@ -12,5 +12,8 @@ The MIT license at the repository root does not apply to this folder.
 Changes: the overview page was summarised and translated, and split into topic notes. Each file names the
 sections it is based on. The notes are unofficial and not endorsed by the authors of Zettelkasten.de.
 
-Note: the page's HTML metadata (`<meta name="copyright">`) still names CC BY-NC-SA 3.0, while the visible
-license notice and the legal page name CC BY-SA. If you plan commercial reuse, check with the authors first.
+Note: the pages' HTML metadata (`<meta name="copyright">`) still names CC BY-NC-SA 3.0. That value is a
+site-configuration leftover from 2013; the visible license notice is the current one. In the site's source
+repository, Christian Tietze changed the footer license from CC BY-SA 3.0 to CC BY-SA 4.0 in commit
+[`a7b6913`](https://github.com/Zettelkasten-Method/zettelkasten.de/commit/a7b6913052ad7213dbc0ad60f0825a953460cf5f) ("update to CC BY-SA 4.0",
+2021-02-21), and the legal page names CC BY-SA as well.
