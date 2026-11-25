@@ -33,8 +33,13 @@ to the source.
 
 ## Using this archive
 
-- Treat it as background reading, not as rules. Rules for your own knowledge base come from the
-  `create-knowledge-rules` skill.
+- Treat it as background reading, not as rules. The rules for this knowledge base are in
+  [`docs/knowledge-governance.md`](../../docs/knowledge-governance.md); the `create-knowledge-rules` skill
+  tailors them.
 - Keep upstream files as they are. Update a snapshot by replacing it with a newer upstream copy and
   recording the source commit or date in the folder `README.md`.
+- Add your own external sources as new folders here, following rule R-DIST-6, and list each one in this table
+  and in `THIRD_PARTY_NOTICES.md`.
 - Exclude this folder from routine knowledge searches; open it only when you need the original reasoning.
+- Not interested in the methodology? Delete the folders you do not want, together with their rows here and in
+  `THIRD_PARTY_NOTICES.md`.

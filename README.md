@@ -7,35 +7,60 @@ team wiki in a repository, or a folder of notes your agents keep up to date.
 
 It contains:
 
-- **`create-knowledge-rules`**, a skill that interviews you about how your team creates and uses knowledge,
-  then writes knowledge-management rules for your agents: how to read, distil, write, and update knowledge.
-  You describe your situation; the agent picks the methodology.
+- **A ready-to-use knowledge base**: `AGENTS.md` and [`docs/knowledge-governance.md`](docs/knowledge-governance.md)
+  hold default rules for how agents read, distil, write, and update knowledge, and [`knowledge/`](knowledge/README.md)
+  holds the index, taxonomy, and glossary to start from.
+- **`create-knowledge-rules`**, a skill that interviews you about how your team creates and uses knowledge and
+  rewrites those rules to fit. You describe your situation; the agent picks the methodology.
 - **`git-commit`**, a standalone skill that writes Conventional Commits messages and commits safely.
-- **A source archive** in [`knowledge/docs/`](knowledge/docs/README.md): the methodology sources the rules
-  are built from (Diátaxis, ADR, Zettelkasten, ISO 30401, Google developer style, The Good Docs Project, and
-  the Agent Skills standard).
+- **The methodology sources** in [`knowledge/sources/`](knowledge/sources/README.md): Diátaxis, ADR,
+  Zettelkasten, ISO 30401, Google developer style, The Good Docs Project, and the Agent Skills standard, with
+  study notes.
 
 Both skills follow the [Agent Skills](https://agentskills.io/) open standard and work in Cursor, Claude Code,
 OpenAI Codex, Google Antigravity, and Gemini CLI.
 
-## Quick start
+## Three ways to use it
 
-1. Copy the skills into your project (or into your user-level skills folder, see [Tool support](#tool-support)):
+### 1. Start a new knowledge base from this template
 
-   ```sh
-   mkdir -p .agents/skills
-   cp -R path/to/rag-init/.agents/skills/create-knowledge-rules .agents/skills/
-   cp -R path/to/rag-init/.agents/skills/git-commit .agents/skills/
-   ```
+Click **Use this template** on GitHub. You get a new repository with these files and no history, and you can
+make it private. Then:
 
-   For Claude Code, copy the same folders into `.claude/skills/` as well. Copy the real folders from
-   `.agents/skills/`, not the thin wrappers in this repository's `.claude/skills/`.
-2. Ask your agent: "Set up knowledge-management rules for this repository", or run `/create-knowledge-rules`
-   (in Codex, `$create-knowledge-rules`).
-3. Answer the questions. Each one comes with a suggested answer you can accept as is. Before writing
-   anything, the agent shows a summary of your situation and the rules it plans to use.
+1. Open the repository in your agent and run `/create-knowledge-rules` (in Codex, `$create-knowledge-rules`).
+   Answer the questions — each comes with a suggested answer — and the agent rewrites the default rules for
+   your situation. You can also keep the defaults and start writing.
+2. Replace this `README.md` and `README.zh-TW.md` with your own, and delete `CONTRIBUTING.md`, which is for
+   rag-init itself.
+3. `LICENSE` covers rag-init's own files. Choose the license for your own content; keep
+   `THIRD_PARTY_NOTICES.md` and the license files inside `knowledge/sources/` for as long as you keep those
+   folders.
+4. Not interested in the methodology sources? Delete `knowledge/sources/` (or the folders you do not want)
+   and the matching rows in `THIRD_PARTY_NOTICES.md`.
 
-You can also open this repository itself in any of the tools below; the skills are discovered automatically.
+A repository created from a template does not receive later changes to rag-init. If you want them, fork the
+repository instead (a fork of a public repository stays public) or add rag-init as a second remote and merge
+from it; you can also update only the skills with the second way below.
+
+### 2. Add the skills to an existing project
+
+Copy the skill folders into your project, or into your user-level skills folder to use them everywhere (see
+[Tool support](#tool-support)):
+
+```sh
+mkdir -p .agents/skills
+cp -R path/to/rag-init/.agents/skills/create-knowledge-rules .agents/skills/
+cp -R path/to/rag-init/.agents/skills/git-commit .agents/skills/
+```
+
+For Claude Code, copy the same folders into `.claude/skills/` as well. Copy the real folders from
+`.agents/skills/`, not the thin wrappers in this repository's `.claude/skills/`. Then ask your agent to "set up
+knowledge-management rules for this repository", or run `/create-knowledge-rules`.
+
+### 3. Bootstrap from the command line
+
+A command-line tool that sets up a project and hands over to your agent is planned in a separate repository,
+`rag-init-cli`.
 
 ## What `create-knowledge-rules` produces
 
@@ -48,7 +73,7 @@ You can also open this repository itself in any of the tools below; the skills a
 
 The interview covers what the knowledge base holds, who reads it and how, where knowledge comes from, writing
 and review habits, language and location, the token budget, and how agents should read knowledge. You choose
-one of three budgets:
+one of three budgets; the defaults in this repository use Standard:
 
 | Tier | Fits | Always-on section | Rules document |
 | --- | --- | --- | --- |
@@ -107,25 +132,29 @@ Notes:
 
 ```text
 rag-init/
-├── README.md, README.zh-TW.md
-├── LICENSE                         # MIT, for this repository's own content
+├── README.md, README.zh-TW.md      # about rag-init; replace in your own repository
+├── CONTRIBUTING.md                 # rules for changing rag-init itself
+├── LICENSE                         # MIT, for rag-init's own content
 ├── THIRD_PARTY_NOTICES.md          # upstream licenses, folder by folder
-├── AGENTS.md                       # maintenance rules for this repository
+├── AGENTS.md                       # default always-on knowledge rules
 ├── CLAUDE.md                       # @AGENTS.md
+├── docs/knowledge-governance.md    # default rules document (Standard tier)
+├── knowledge/
+│   ├── README.md, taxonomy.md, glossary.md
+│   └── sources/                    # methodology sources and study notes
 ├── .agents/skills/
 │   ├── create-knowledge-rules/     # SKILL.md, references/, assets/ (templates and examples)
 │   └── git-commit/                 # SKILL.md, references/conventional-commits-1.0.0.md
-├── .claude/skills/<name>/SKILL.md  # Claude Code wrappers that point to .agents/skills/<name>/
-└── knowledge/docs/                 # methodology source archive
+└── .claude/skills/<name>/SKILL.md  # Claude Code wrappers that point to .agents/skills/<name>/
 ```
 
 ## Licenses
 
-This repository's own content is MIT-licensed ([`LICENSE`](LICENSE)). The source archive keeps each upstream
+rag-init's own content is MIT-licensed ([`LICENSE`](LICENSE)). The methodology sources keep each upstream
 license, and some folders are CC BY-SA 4.0 rather than MIT; see
 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md). Knowledge-Centered Service (KCS) is part of the
-methodology but is not included, because its license does not allow sharing adaptations; the archive links to
-the original instead.
+methodology but is not included, because its license does not allow sharing adaptations; the sources folder
+links to the original instead.
 
-Most notes in `knowledge/docs/` are unofficial Traditional Chinese summaries; upstream snapshots stay in their
-original language.
+Most notes in `knowledge/sources/` are unofficial Traditional Chinese summaries; upstream snapshots stay in
+their original language.

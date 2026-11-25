@@ -7,32 +7,52 @@
 
 內容：
 
-- **`create-knowledge-rules`**：一個 skill。它會訪談你的團隊怎麼產生和使用知識，再為你的 agent 寫出知識管理規則，
-  涵蓋讀取、蒸餾、撰寫與更新。你只要描述情境，方法論由 agent 挑選。
+- **可直接使用的知識庫**：`AGENTS.md` 和 [`docs/knowledge-governance.md`](docs/knowledge-governance.md) 放了一套
+  預設規則，規定 agent 怎麼讀取、蒸餾、撰寫與更新知識；[`knowledge/`](knowledge/README.md) 放了起步用的 index、
+  taxonomy 和 glossary。
+- **`create-knowledge-rules`**：一個 skill。它會訪談你的團隊怎麼產生和使用知識，再把上述規則改寫成適合你的版本。
+  你只要描述情境，方法論由 agent 挑選。
 - **`git-commit`**：一個可獨立運作的 skill，撰寫符合 Conventional Commits 的 commit 訊息，並安全地 commit。
-- **來源封存區** [`knowledge/docs/`](knowledge/docs/README.md)：規則所依據的方法論來源，包括 Diátaxis、ADR、
-  Zettelkasten、ISO 30401、Google 開發者文件風格指南、The Good Docs Project，以及 Agent Skills 標準。
+- **方法論來源** [`knowledge/sources/`](knowledge/sources/README.md)：Diátaxis、ADR、Zettelkasten、ISO 30401、
+  Google 開發者文件風格指南、The Good Docs Project 和 Agent Skills 標準，附閱讀筆記。
 
 兩個 skill 都遵循 [Agent Skills](https://agentskills.io/) 開放標準，可在 Cursor、Claude Code、OpenAI Codex、
 Google Antigravity 與 Gemini CLI 使用。
 
-## 快速開始
+## 三種使用方式
 
-1. 把 skill 複製到你的專案（或使用者層級的 skills 目錄，見[各工具支援](#各工具支援)）：
+### 1. 用這個 template 建立新的知識庫
 
-   ```sh
-   mkdir -p .agents/skills
-   cp -R path/to/rag-init/.agents/skills/create-knowledge-rules .agents/skills/
-   cp -R path/to/rag-init/.agents/skills/git-commit .agents/skills/
-   ```
+在 GitHub 上按 **Use this template**，就會得到一個包含這些檔案、沒有 commit 歷史的新 repository，而且可以設成私有。
+接著：
 
-   使用 Claude Code 時，再把同樣的資料夾複製到 `.claude/skills/`。請複製 `.agents/skills/` 裡的實體資料夾，
-   不要複製本 repository `.claude/skills/` 裡的薄 wrapper。
-2. 對 agent 說「幫這個 repository 建立知識管理規則」，或執行 `/create-knowledge-rules`（Codex 用
-   `$create-knowledge-rules`）。
-3. 回答問題。每一題都附建議答案，可以直接採用。動筆之前，agent 會先給你一份情境摘要和預計採用的規則，請你確認。
+1. 用你的 agent 開啟新 repository，執行 `/create-knowledge-rules`（Codex 用 `$create-knowledge-rules`）。回答問題
+   （每題都附建議答案），agent 會依你的情境改寫預設規則。你也可以先沿用預設規則，直接開始寫。
+2. 把 `README.md` 和 `README.zh-TW.md` 換成你自己的內容，並刪除 `CONTRIBUTING.md`，那份是給 rag-init 本身用的。
+3. `LICENSE` 只涵蓋 rag-init 自己的檔案。你自己的內容請自選授權；只要保留 `knowledge/sources/` 裡的資料夾，就要
+   一併保留 `THIRD_PARTY_NOTICES.md` 和其中的授權檔。
+4. 不需要方法論來源的話，刪除 `knowledge/sources/`（或其中不要的資料夾），並刪掉 `THIRD_PARTY_NOTICES.md` 裡對應的列。
 
-你也可以直接用下列任一工具開啟本 repository，skill 會自動被探索到。
+從 template 建立的 repository 收不到 rag-init 之後的更新。需要更新的話，可以改用 fork（公開 repository 的 fork
+會維持公開），或把 rag-init 加為第二個 remote 再 merge；也可以只用下面第二種方式更新 skill。
+
+### 2. 把 skill 加進既有專案
+
+把 skill 資料夾複製到你的專案，或複製到使用者層級的 skills 目錄讓所有專案共用（見[各工具支援](#各工具支援)）：
+
+```sh
+mkdir -p .agents/skills
+cp -R path/to/rag-init/.agents/skills/create-knowledge-rules .agents/skills/
+cp -R path/to/rag-init/.agents/skills/git-commit .agents/skills/
+```
+
+使用 Claude Code 時，再把同樣的資料夾複製到 `.claude/skills/`。請複製 `.agents/skills/` 裡的實體資料夾，不要複製
+本 repository `.claude/skills/` 裡的薄 wrapper。接著對 agent 說「幫這個 repository 建立知識管理規則」，或執行
+`/create-knowledge-rules`。
+
+### 3. 用命令列工具起手
+
+會在獨立的 repository `rag-init-cli` 提供一個命令列工具，負責鋪設專案並交棒給你的 agent，目前規劃中。
 
 ## `create-knowledge-rules` 會產出什麼
 
@@ -42,7 +62,7 @@ Google Antigravity 與 Gemini CLI 使用。
   只放讀取規則和寫入前的檢查。agent 只有在寫入知識時才讀完整的規則文件。
 
 訪談涵蓋：知識庫放哪類內容、誰會讀、怎麼用、知識從哪裡來、撰寫與回顧習慣、語言和存放位置、token 預算，以及
-agent 該怎麼讀取知識。token 預算有三個等級：
+agent 該怎麼讀取知識。token 預算有三個等級，本 repository 的預設規則採「標準」：
 
 | 等級 | 適用 | 常駐段落 | 規則文件 |
 | --- | --- | --- | --- |
@@ -99,22 +119,26 @@ clone 下來的行為都一樣。
 
 ```text
 rag-init/
-├── README.md, README.zh-TW.md
-├── LICENSE                         # MIT，適用本 repository 自有內容
+├── README.md, README.zh-TW.md      # 介紹 rag-init；在你自己的 repository 請換掉
+├── CONTRIBUTING.md                 # 修改 rag-init 本身時的規則
+├── LICENSE                         # MIT，適用 rag-init 自有內容
 ├── THIRD_PARTY_NOTICES.md          # 逐目錄列出上游授權
-├── AGENTS.md                       # 本 repository 的維護規則
+├── AGENTS.md                       # 預設的常駐知識規則
 ├── CLAUDE.md                       # @AGENTS.md
+├── docs/knowledge-governance.md    # 預設規則文件（標準等級）
+├── knowledge/
+│   ├── README.md, taxonomy.md, glossary.md
+│   └── sources/                    # 方法論來源與閱讀筆記
 ├── .agents/skills/
 │   ├── create-knowledge-rules/     # SKILL.md、references/、assets/（範本與範例）
 │   └── git-commit/                 # SKILL.md、references/conventional-commits-1.0.0.md
-├── .claude/skills/<name>/SKILL.md  # 指向 .agents/skills/<name>/ 的 Claude Code wrapper
-└── knowledge/docs/                 # 方法論來源封存區
+└── .claude/skills/<name>/SKILL.md  # 指向 .agents/skills/<name>/ 的 Claude Code wrapper
 ```
 
 ## 授權
 
-本 repository 自有內容採 MIT 授權（[`LICENSE`](LICENSE)）。來源封存區保留各自的上游授權，其中部分目錄是
-CC BY-SA 4.0 而非 MIT，詳見 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)。Knowledge-Centered Service（KCS）
-是方法論的一部分，但因授權不允許散布改作而沒有收錄，封存區改為連到原文。
+rag-init 自有內容採 MIT 授權（[`LICENSE`](LICENSE)）。方法論來源保留各自的上游授權，其中部分目錄是 CC BY-SA 4.0
+而非 MIT，詳見 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)。Knowledge-Centered Service（KCS）是方法論的
+一部分，但因授權不允許散布改作而沒有收錄，來源目錄改為連到原文。
 
-`knowledge/docs/` 裡的筆記多為非官方的繁體中文摘要；上游快照維持原文語言。
+`knowledge/sources/` 裡的筆記多為非官方的繁體中文摘要；上游快照維持原文語言。
