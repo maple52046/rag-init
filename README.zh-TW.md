@@ -52,7 +52,16 @@ cp -R path/to/rag-init/.agents/skills/git-commit .agents/skills/
 
 ### 3. 用命令列工具起手
 
-會在獨立的 repository `rag-init-cli` 提供一個命令列工具，負責鋪設專案並交棒給你的 agent，目前規劃中。
+[`rag-init-cli`](https://github.com/maple52046/rag-init-cli) 提供 Linux、macOS 與 Windows 版的 `rag-init` 執行檔，
+一個指令就能完成上面兩種方式之一，不需要網路，最後再啟動你的 agent 調整規則：
+
+```sh
+rag-init new my-knowledge-base     # 建立新的 repository：template 檔案、git init、第一個 commit
+rag-init init                      # 把 rag-init 加進目前目錄的專案
+```
+
+`init` 不會覆寫你的檔案。到 [releases 頁面](https://github.com/maple52046/rag-init-cli/releases) 下載執行檔，或執行
+`go install github.com/maple52046/rag-init-cli/cmd/rag-init@latest`；完整參數見它的 README。
 
 ## `create-knowledge-rules` 會產出什麼
 

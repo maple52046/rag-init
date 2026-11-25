@@ -59,8 +59,17 @@ knowledge-management rules for this repository", or run `/create-knowledge-rules
 
 ### 3. Bootstrap from the command line
 
-A command-line tool that sets up a project and hands over to your agent is planned in a separate repository,
-`rag-init-cli`.
+[`rag-init-cli`](https://github.com/maple52046/rag-init-cli) provides a `rag-init` binary for Linux, macOS, and
+Windows that does either of the above in one command, offline, and then starts your agent to tailor the rules:
+
+```sh
+rag-init new my-knowledge-base     # a new repository: template files, git init, first commit
+rag-init init                      # add rag-init to the project in the current directory
+```
+
+`init` never overwrites your files. Download the binary from the
+[releases page](https://github.com/maple52046/rag-init-cli/releases) or run
+`go install github.com/maple52046/rag-init-cli/cmd/rag-init@latest`; see its README for all flags.
 
 ## What `create-knowledge-rules` produces
 

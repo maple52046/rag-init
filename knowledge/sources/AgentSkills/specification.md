@@ -269,3 +269,5 @@ skills-ref validate ./my-skill
 - `skills-ref to-prompt <path>...`：產生 `<available_skills>` XML，每個 skill 含 `name`、`description`（HTML escape）與 `location`（`SKILL.md` 絕對路徑）。原始碼註解說明此 XML 格式是 Anthropic 為 Claude models 使用並推薦的格式，client 可依 model 自訂格式。catalog 格式的一般說明見 [`client-implementation.md`](client-implementation.md#step-3揭露可用-skill-給-model)。
 
 套件資訊：`skills-ref` 0.1.0，需要 Python ≥ 3.11，依賴 `click` 與 `strictyaml`，Apache-2.0 授權。
+PyPI 上的 `skills-ref` 0.1.1（2026-11 查證）提供的執行檔名稱是 `agentskills`，不是 `skills-ref`；不安裝直接執行用
+`uvx --from skills-ref agentskills validate <dir>`。從上游原始碼安裝時，`pyproject.toml` 定義的指令仍是 `skills-ref`。

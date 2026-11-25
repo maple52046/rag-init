@@ -19,8 +19,15 @@ repository. Anything at the root is therefore part of the user's starting point.
 - The default rules (`docs/knowledge-governance.md` and the `AGENTS.md` section) are a Standard-tier output of
   `create-knowledge-rules` for a generic team. Keep them within the Standard limits in the skill's `SKILL.md`,
   use the rule IDs from `references/rule-catalog.md`, and update them when the catalog changes.
-- A command-line bootstrapper is planned in a separate repository, `rag-init-cli`, which will take its content
-  from rag-init. Keep the paths of skills, templates, and default rules stable once it exists.
+- The command-line tool in [`rag-init-cli`](https://github.com/maple52046/rag-init-cli) embeds a tagged
+  version of this repository and relies on its paths: `AGENTS.md` with the `knowledge-rules` markers,
+  `CLAUDE.md`, `docs/knowledge-governance.md`, `knowledge/`, `knowledge/sources/`, `.agents/skills/<name>/`, and
+  `.claude/skills/<name>/`. Changing any of them needs a matching change in rag-init-cli.
+
+## Releases
+
+- Tag a release `vX.Y.Z` on `main` when the content users get has changed. Tags are never moved or reused.
+- After tagging, update rag-init-cli to embed the new tag and release it (see its `AGENTS.md`).
 
 ## Skills
 

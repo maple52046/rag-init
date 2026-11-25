@@ -5,7 +5,8 @@ troubleshooting entries, reference facts, design decisions, and explanations. Pe
 it — to look up an answer during a task, to follow steps, or to understand background. It is written in
 English.
 
-These are the default rules that ship with rag-init. They assume a small team whose members and agents write
+These are the default rules that ship with [rag-init](https://github.com/maple52046/rag-init) (MIT License).
+They assume a small team whose members and agents write
 knowledge while they work and review it when something turns out wrong. To fit the rules to your own
 situation, run the `create-knowledge-rules` skill (`/create-knowledge-rules`, or `$create-knowledge-rules` in
 Codex); it rewrites this document and the `knowledge-rules` section of `AGENTS.md`.
