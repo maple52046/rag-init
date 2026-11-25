@@ -1,0 +1,60 @@
+<!--
+Template for the rules document. Replace every {{...}} placeholder, keep only the rules selected for the
+tier, write in the user's language, and delete this comment. Each rule line has the form:
+- **<rule ID>** <rule in the user's words> *(<source methodology>)*
+Keep rule IDs in English. Drop a section heading only when no rule in it was kept; then say in one line
+where that topic is handled (for example "Reading rules are in AGENTS.md.").
+-->
+# Knowledge management rules
+
+{{PURPOSE: one paragraph — what the knowledge base is for, who reads it (agents, people), how they use it
+(look up answers, follow steps, understand background), and its language.}}
+
+Tier: {{TIER}}. The always-on rules live in the `knowledge-rules` section of [`AGENTS.md`]({{AGENTS_MD_LINK}});
+this document holds the rest. Read it before creating, moving, or restructuring knowledge.
+
+## Layout
+
+{{LAYOUT: the knowledge root (for example `knowledge/`), its topic folders and index files, the source archive
+if any, the scratch areas whose content must be distilled rather than moved, and the reference direction
+when R-WRITE-11 is kept.}}
+
+## 1. Reading
+
+{{READ_RULES: rules from the Read part that are not in AGENTS.md, for example R-READ-10. If all reading rules
+are in AGENTS.md, write "The reading rules are in AGENTS.md."}}
+
+## 2. Distilling
+
+{{DISTIL_RULES: selected R-DIST-* rules, including when knowledge is captured and what is eligible.}}
+
+## 3. Writing
+
+{{WRITE_RULES: selected R-WRITE-* rules. When R-WRITE-2 is kept, include the two compass questions and the
+four types. When R-WRITE-5 is kept, include the frontmatter block with the allowed doc_type and status values.
+When R-WRITE-9 is kept, include or link the templates for each type.}}
+
+## 4. Updating
+
+{{UPDATE_RULES: selected R-UPD-* rules. When R-UPD-3 is kept, include the status values and their meaning.
+When R-UPD-7 is kept, state the cadence and what the review lists.}}
+
+## Quality checklist
+
+{{CHECKLIST: only when R-UPD-10 is kept — one checkbox per kept rule that can be checked before committing.
+Otherwise delete this section.}}
+
+## Sources
+
+The rules above adapt ideas from these sources; read them for the reasoning behind a rule.
+
+{{SOURCES: one line per methodology actually cited above, with its link.}}
+
+## Excluded rules
+
+These rules were left out to stay within the {{TIER}} budget or because the situation does not need them yet.
+
+| Rule | Why it was left out | Add it back when |
+| --- | --- | --- |
+{{EXCLUDED: one row per excluded rule (priority core/high/medium/low, never n/a), for example:
+| R-UPD-7 Periodic review | The team reviews on demand only | Stale or duplicate documents start showing up in answers |}}
